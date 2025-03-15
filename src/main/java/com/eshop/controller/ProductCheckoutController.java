@@ -23,7 +23,6 @@ public class ProductCheckoutController {
     @PostMapping("/checkout")
     public ResponseEntity<StripeResponse> checkoutProducts(@RequestBody ProductRequest productRequest,@RequestParam("orderId") String orderId,@RequestHeader HttpHeaders headers) {
         AuthCodeConfig.TOKEN = Objects.requireNonNull(headers.get("Authorization")).getFirst();
-        HomeController.setOrderId(Integer.parseInt(orderId));
         StripeResponse stripeResponse = stripeService.checkoutProducts(productRequest,orderId,AuthCodeConfig.TOKEN);
         return ResponseEntity
                 .status(HttpStatus.OK)
