@@ -32,7 +32,7 @@ public class HomeController {
     public static void setOrderId(Integer orderId) {
         ORDER_ID = orderId;
     }
-    @GetMapping("/failure")
+    @GetMapping("/cancel")
     public ResponseEntity<String> failure() {
         template.exchange("http://localhost:3333/EShop/order-api/order/" + ORDER_ID + "/update/order-status",
                 HttpMethod.PUT,
