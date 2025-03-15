@@ -16,7 +16,7 @@ public class StripeService {
     private String secretKey;
 
 
-        public StripeResponse checkoutProducts(ProductRequest productRequest) {
+        public StripeResponse checkoutProducts(ProductRequest productRequest,String orderId,String token) {
             Stripe.apiKey = secretKey;
 
             SessionCreateParams.LineItem.PriceData.ProductData productData =
@@ -41,8 +41,8 @@ public class StripeService {
             SessionCreateParams params =
                     SessionCreateParams.builder()
                             .setMode(SessionCreateParams.Mode.PAYMENT)
-                            .setSuccessUrl("http://localhost:8080/success")
-                            .setCancelUrl("http://localhost:8080/cancel")
+                            .setSuccessUrl("http://localhost:3333/EShop/success?orderId="+orderId+"&token="+token)
+                            .setCancelUrl("http://localhost:3333/EShop/cancel?orderId="+orderId+"&token="+token)
                             .addLineItem(lineItem)
                             .build();
 
